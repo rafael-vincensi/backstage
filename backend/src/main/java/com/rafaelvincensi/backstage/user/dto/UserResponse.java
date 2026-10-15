@@ -1,4 +1,12 @@
 package com.rafaelvincensi.backstage.user.dto;
 
-public class UserResponse {
+import java.util.UUID;
+
+public record UserResponse (
+        UUID id,
+        String username,
+        String name,
+        String bio,
+        String avatarUrl
+){
 }

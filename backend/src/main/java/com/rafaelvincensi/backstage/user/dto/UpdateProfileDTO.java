@@ -1,11 +1,9 @@
 package com.rafaelvincensi.backstage.user.dto;
 
-import java.util.UUID;
-
-public record UserResponse (
-        UUID id,
+public record UpdateProfileDTO(
         String username,
         String name,
-        String bio
-){
+        String bio,
+        String avatarUrl
+) {
 }

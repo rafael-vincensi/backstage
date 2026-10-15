@@ -29,7 +29,7 @@ The backend exposes a REST API that handles users, posts, search, and profile ma
 
 ```bash
 cd backend
-[./mvnw spring-boot:run]
+./mvnw spring-boot:run
 ```
 
 ### Frontend

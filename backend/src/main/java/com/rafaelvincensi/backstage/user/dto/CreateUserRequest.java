@@ -1,4 +1,9 @@
 package com.rafaelvincensi.backstage.user.dto;
 
-public class CreateUserRequest {
+public record CreateUserRequest (
+        String username,
+        String name,
+        String email,
+        String password
+) {
 }

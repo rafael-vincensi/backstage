@@ -26,7 +26,7 @@ public class User {
 
     @Column(name = "avatar_url")
     private String avatarUrl;
-
+    private String bio;
     @Column(unique = true)
     private String email;
 

@@ -42,7 +42,7 @@ npm run dev
 
 ### Environment Variables
 
-Create the required configuration file for the backend (e.g. `application.properties`) with your database connection:
+Create the required configuration file for the backend (`application.properties`) with your database connection:
 
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/[database_name]
@@ -56,6 +56,14 @@ spring.datasource.password=[password]
 backend/     # Spring Boot REST API
 frontend/    # Web client
 ```
+
+## Status
+
+BKSTG is currently under development. Features and architecture are still evolving, and the list above represents the project's intended direction rather than a finished feature set.
+
+More details, screenshots, and setup instructions will be added as development progresses.
+
+
 ---
 
 *Built by [rafael-vincensi](https://github.com/rafael-vincensi)*

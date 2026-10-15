@@ -1,4 +1,9 @@
 package com.rafaelvincensi.backstage.user.dto;
 
-public class UpdateProfileRequest {
+public record UpdateProfileRequest (
+        String username,
+        String name,
+        String avatarUrl,
+        String bio
+){
 }

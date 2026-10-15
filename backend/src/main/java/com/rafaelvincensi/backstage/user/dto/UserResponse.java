@@ -7,6 +7,5 @@ public record UserResponse (
         String username,
         String name,
         String bio,
-        String avatarUrl
 ){
 }

@@ -6,6 +6,6 @@ public record UserResponse (
         UUID id,
         String username,
         String name,
-        String bio,
+        String bio
 ){
 }

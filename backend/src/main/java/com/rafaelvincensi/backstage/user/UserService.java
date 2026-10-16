@@ -4,7 +4,6 @@ import com.rafaelvincensi.backstage.exceptions.ConflictException;
 import com.rafaelvincensi.backstage.exceptions.NotFoundException;
 import com.rafaelvincensi.backstage.user.dto.CreateUserRequestDTO;
 import com.rafaelvincensi.backstage.user.dto.UpdateProfileDTO;
-import jakarta.validation.ValidationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +63,7 @@ public class UserService {
          if (request.name() != null) user.setName(request.name());
          if (request.bio() != null) user.setBio(request.bio());
          if (request.avatarUrl() != null) user.setAvatarUrl(request.avatarUrl());
+         user.setUpdatedAt(LocalDateTime.now());
 
          return userRepository.save(user);
     }

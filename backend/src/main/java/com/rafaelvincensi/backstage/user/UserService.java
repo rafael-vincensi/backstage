@@ -44,8 +44,13 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User findById(UUID id){
+    public User findUserById(UUID id){
         return userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("User not found!"));
+    }
+
+    public User findUserByUsername(String username){
+        return userRepository.findByUsername(username)
                 .orElseThrow(() -> new NotFoundException("User not found!"));
     }
 

@@ -4,6 +4,7 @@ import com.rafaelvincensi.backstage.exceptions.ConflictException;
 import com.rafaelvincensi.backstage.exceptions.NotFoundException;
 import com.rafaelvincensi.backstage.user.dto.CreateUserRequestDTO;
 import com.rafaelvincensi.backstage.user.dto.UpdateProfileDTO;
+import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -78,6 +79,7 @@ public class UserService {
          return userRepository.save(user);
     }
 
+    @Transactional
     public void delete(UUID id){
         userRepository.deleteById(id);
     }

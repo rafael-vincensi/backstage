@@ -8,7 +8,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -45,6 +44,11 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User findById(UUID id){
+        return userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("User not found!"));
+    }
+
     public User updateProfile(UUID id, UpdateProfileDTO request){
 
          var user = userRepository.findById(id)
@@ -63,6 +67,7 @@ public class UserService {
          if (request.name() != null) user.setName(request.name());
          if (request.bio() != null) user.setBio(request.bio());
          if (request.avatarUrl() != null) user.setAvatarUrl(request.avatarUrl());
+
          user.setUpdatedAt(LocalDateTime.now());
 
          return userRepository.save(user);

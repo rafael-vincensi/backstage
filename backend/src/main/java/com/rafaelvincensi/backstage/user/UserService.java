@@ -3,7 +3,6 @@ package com.rafaelvincensi.backstage.user;
 import com.rafaelvincensi.backstage.exceptions.ConflictException;
 import com.rafaelvincensi.backstage.exceptions.NotFoundException;
 import com.rafaelvincensi.backstage.user.dto.CreateUserRequestDTO;
-import com.rafaelvincensi.backstage.user.dto.UpdateProfileDTO;
 import com.rafaelvincensi.backstage.user.dto.UpdateProfileRequestDTO;
 import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -80,7 +80,7 @@ public class UserService {
     }
 
     @Transactional
-    public void delete(UUID id){
+    public void deleteUser(UUID id){
         userRepository.deleteById(id);
     }
 }

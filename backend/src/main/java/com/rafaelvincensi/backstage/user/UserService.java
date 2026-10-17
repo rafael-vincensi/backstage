@@ -82,6 +82,9 @@ public class UserService {
 
     @Transactional
     public void deleteUser(UUID id){
+        var user = userRepository.findById(id)
+                        .orElseThrow(() -> new NotFoundException("User not found!"));
+
         userRepository.deleteById(id);
     }
 }

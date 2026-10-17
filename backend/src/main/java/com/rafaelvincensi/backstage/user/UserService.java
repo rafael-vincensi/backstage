@@ -4,6 +4,7 @@ import com.rafaelvincensi.backstage.exceptions.ConflictException;
 import com.rafaelvincensi.backstage.exceptions.NotFoundException;
 import com.rafaelvincensi.backstage.user.dto.CreateUserRequestDTO;
 import com.rafaelvincensi.backstage.user.dto.UpdateProfileDTO;
+import com.rafaelvincensi.backstage.user.dto.UpdateProfileRequestDTO;
 import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -55,12 +56,12 @@ public class UserService {
                 .orElseThrow(() -> new NotFoundException("User not found!"));
     }
 
-    public User updateProfile(UUID id, UpdateProfileDTO request){
+    public User updateProfile(UUID id, UpdateProfileRequestDTO request){
 
          var user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User not found!"));
 
-         if (request.username() != null){
+         if (request.username() != null && !request.username().isBlank()){
              userRepository.findByUsername(request.username())
                      .ifPresent(existingUser -> {
                          if (!user.getId().equals(existingUser.getId())) {
@@ -70,7 +71,7 @@ public class UserService {
              user.setUsername(request.username());
          }
 
-         if (request.name() != null) user.setName(request.name());
+         if (request.name() != null && !request.name().isBlank()) user.setName(request.name());
          if (request.bio() != null) user.setBio(request.bio());
          if (request.avatarUrl() != null) user.setAvatarUrl(request.avatarUrl());
 

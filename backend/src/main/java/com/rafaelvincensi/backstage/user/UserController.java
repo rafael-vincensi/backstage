@@ -21,4 +21,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @GetMapping("/username/{username}")
+    public ResponseEntity<UserResponseDTO> findUserByUsername(@PathVariable String username){
+        User userByUsername = userService.findUserByUsername(username);
+        var response = UserResponseDTO.fromEntity(userByUsername);
+
+        return ResponseEntity.ok(response);
+    }
 }

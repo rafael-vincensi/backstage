@@ -1,4 +1,4 @@
-package com.rafaelvincensi.backstage.user.dto;
+package com.rafaelvincensi.backstage.exceptions.errorDetails;
 
 import java.time.LocalDateTime;
 

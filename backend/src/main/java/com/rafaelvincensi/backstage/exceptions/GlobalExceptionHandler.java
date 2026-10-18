@@ -1,6 +1,6 @@
 package com.rafaelvincensi.backstage.exceptions;
 
-import com.rafaelvincensi.backstage.exceptions.errorDetails.ErrorDetails;
+import com.rafaelvincensi.backstage.config.exception.ErrorDetails;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

@@ -1,4 +1,4 @@
-package com.rafaelvincensi.backstage.exceptions.errorDetails;
+package com.rafaelvincensi.backstage.infra.exception;
 
 import java.time.LocalDateTime;
 

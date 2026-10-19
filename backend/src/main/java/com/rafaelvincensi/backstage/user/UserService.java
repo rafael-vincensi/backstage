@@ -39,6 +39,7 @@ public class UserService {
         User user = new User();
         user.setUsername(request.username());
         user.setName(request.name());
+        user.setEmail(request.email());
         user.setPassword(passwordHash);
         user.setCreatedAt(LocalDateTime.now());
 

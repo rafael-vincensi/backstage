@@ -1,6 +1,5 @@
 package com.rafaelvincensi.backstage.user.dto;
 
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 
 public record UpdateProfileRequestDTO(

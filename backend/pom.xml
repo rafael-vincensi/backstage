@@ -98,6 +98,12 @@
             <artifactId>java-jwt</artifactId>
             <version>4.6.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.awspring.cloud</groupId>
+            <artifactId>spring-cloud-aws-starter-s3</artifactId>
+            <version>3.2.1</version>
+        </dependency>
 	</dependencies>
 
 

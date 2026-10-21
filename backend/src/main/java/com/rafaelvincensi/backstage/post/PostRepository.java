@@ -1,4 +1,8 @@
 package com.rafaelvincensi.backstage.post;
 
-public class PostRepository {
+import java.util.List;
+
+public interface PostRepository<Post, UUID> {
+
+    List<Post> findByUserId(UUID id);
 }

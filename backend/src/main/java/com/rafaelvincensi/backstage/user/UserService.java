@@ -56,6 +56,11 @@ public class UserService {
                 .orElseThrow(() -> new NotFoundException("User not found!"));
     }
 
+    public User findUserBYEmail(String email){
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new NotFoundException("User not found!"));
+    }
+
     public User updateProfile(UUID id, UpdateProfileRequestDTO request){
 
          var user = userRepository.findById(id)

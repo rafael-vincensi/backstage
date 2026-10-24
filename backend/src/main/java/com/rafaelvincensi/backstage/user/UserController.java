@@ -45,7 +45,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @PatchMapping("update/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<UserResponseDTO> updateProfile(
             @Valid UpdateProfileRequestDTO request,
             @PathVariable UUID id,

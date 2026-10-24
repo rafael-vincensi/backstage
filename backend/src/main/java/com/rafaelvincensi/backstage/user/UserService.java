@@ -2,11 +2,14 @@ package com.rafaelvincensi.backstage.user;
 
 import com.rafaelvincensi.backstage.exceptions.ConflictException;
 import com.rafaelvincensi.backstage.exceptions.NotFoundException;
+import com.rafaelvincensi.backstage.infra.S3StorageService;
 import com.rafaelvincensi.backstage.user.dto.CreateUserRequestDTO;
 import com.rafaelvincensi.backstage.user.dto.UpdateProfileRequestDTO;
+import io.awspring.cloud.s3.S3Template;
 import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -16,10 +19,12 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final S3StorageService s3Service;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, S3StorageService s3Service) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.s3Service = s3Service;
     }
 
     public User createUser(CreateUserRequestDTO request) {
@@ -61,7 +66,7 @@ public class UserService {
                 .orElseThrow(() -> new NotFoundException("User not found!"));
     }
 
-    public User updateProfile(UUID id, UpdateProfileRequestDTO request){
+    public User updateProfile(UUID id, UpdateProfileRequestDTO request, MultipartFile file){
 
          var user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User not found!"));
@@ -78,7 +83,6 @@ public class UserService {
 
          if (request.name() != null && !request.name().isBlank()) user.setName(request.name());
          if (request.bio() != null) user.setBio(request.bio());
-         if (request.avatarUrl() != null) user.setAvatarUrl(request.avatarUrl());
 
          user.setUpdatedAt(LocalDateTime.now());
 

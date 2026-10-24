@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -38,5 +39,10 @@ public class PostService {
 
         return postRepository.save(post);
     }
+
+    public List<Post> getPostsByUser(UUID id){
+        return postRepository.findByUserId(id);
+    }
+
 
 }

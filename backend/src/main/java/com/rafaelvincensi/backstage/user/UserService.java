@@ -5,7 +5,6 @@ import com.rafaelvincensi.backstage.exceptions.NotFoundException;
 import com.rafaelvincensi.backstage.infra.S3StorageService;
 import com.rafaelvincensi.backstage.user.dto.CreateUserRequestDTO;
 import com.rafaelvincensi.backstage.user.dto.UpdateProfileRequestDTO;
-import io.awspring.cloud.s3.S3Template;
 import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -66,7 +65,7 @@ public class UserService {
                 .orElseThrow(() -> new NotFoundException("User not found!"));
     }
 
-    public User updateProfile(UUID id, UpdateProfileRequestDTO request, MultipartFile file){
+    public User updateProfile(UUID id, UpdateProfileRequestDTO request, MultipartFile avatarFile){
 
          var user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User not found!"));
@@ -81,9 +80,13 @@ public class UserService {
              user.setUsername(request.username());
          }
 
+         if (avatarFile != null && !avatarFile.isEmpty()){
+             String url = s3Service.uploadFile(avatarFile);
+             user.setAvatarUrl(url);
+         }
+
          if (request.name() != null && !request.name().isBlank()) user.setName(request.name());
          if (request.bio() != null) user.setBio(request.bio());
-
          user.setUpdatedAt(LocalDateTime.now());
 
          return userRepository.save(user);

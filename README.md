@@ -1,48 +1,55 @@
 # BKSTG
 
-A social photo sharing app where users can publish posts, discover other people, and manage their own profiles.
+A photo-sharing social network where users can publish images, discover people, and manage their profiles.
 
 ## Features
 
-- **User discovery**: browse a randomized selection of user profiles on the home screen
-- **Search**: find users by name or username with live results
-- **Posts**: create posts by uploading an image from your device
-- **Profiles**: view any user's profile with avatar, name, username, bio, and their post grid
-- **Profile editing**: update your name, username (when available), bio, and profile picture, with a preview before saving
-- **Post viewer**: open a post in an enlarged view, with the rest of the interface dimmed
+- **Authentication:** secure authentication and authorization using JWT.
+- **User discovery:** discover people through a randomized selection of user profiles.
+- **Search:** find users by name or username.
+- **Posts:** create and manage image-based posts.
+- **Cloud storage:** store uploaded post images and profile pictures using Amazon S3.
+- **User profiles:** view profiles with avatars, names, usernames, bios, and published posts.
+- **Profile editing:** update names, usernames, bios, and profile pictures.
+- **Username validation:** check username availability when updating profile information.
 
 ## Tech Stack
 
 | Layer | Technology |
-|-------|-----------|
-| Frontend | React, TypeScript |
-| Backend | Java, Spring Boot, Spring Data JPA, Spring Security , JWT |
+|---|---|
+| Language | Java 21 |
+| Framework | Spring Boot |
+| Security | Spring Security, JWT |
+| Persistence | Spring Data JPA, Hibernate |
 | Database | PostgreSQL |
+| Object Storage | Amazon S3 |
+| Build Tool | Maven |
 
 ## Architecture
 
-The backend exposes a REST API that handles users, posts, search, and profile management.
+BKSTG uses a RESTful architecture built with Spring Boot, separating application logic, security, persistence, and file storage.
+
+Spring Security and JWT handle authentication and access control. Spring Data JPA and Hibernate manage relational persistence with PostgreSQL, while Amazon S3 stores uploaded images independently of the database.
+
+This separation keeps structured application data and media storage independent, providing a foundation for a scalable photo-sharing platform.
 
 ## Getting Started
 
-### Backend
+### Prerequisites
+
+- Java 21
+- PostgreSQL
+- An AWS account with an S3 bucket configured for image storage
+
+### Running the Application
 
 ```bash
-cd backend
 ./mvnw spring-boot:run
 ```
 
-### Frontend
+### Configuration
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-### Environment Variables
-
-Create the required configuration file for the backend (`application.properties`) with your database connection:
+Configure the database connection in `application.properties`:
 
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/[database_name]
@@ -50,20 +57,8 @@ spring.datasource.username=[username]
 spring.datasource.password=[password]
 ```
 
-## Project Structure
-
-```
-backend/     # Spring Boot REST API
-frontend/    # Web client
-```
-
-## Status
-
-BKSTG is currently under development. Features and architecture are still evolving, and the list above represents the project's intended direction rather than a finished feature set.
-
-More details, screenshots, and setup instructions will be added as development progresses.
-
+Configure the AWS region, S3 bucket, and credentials according to the application's configuration. Use environment variables, an AWS credentials provider, or IAM roles where appropriate, rather than hardcoding secrets.
 
 ---
 
-*Built by [rafael-vincensi](https://github.com/rafael-vincensi)*
+Built by [rafael-vincensi](https://github.com/rafael-vincensi)

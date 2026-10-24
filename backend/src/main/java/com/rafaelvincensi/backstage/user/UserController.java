@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
@@ -45,8 +46,11 @@ public class UserController {
     }
 
     @PatchMapping("update/{id}")
-    public ResponseEntity<UserResponseDTO> updateProfile(@Valid @RequestBody UpdateProfileRequestDTO request, @PathVariable UUID id){
-        User user = userService.updateProfile(id, request);
+    public ResponseEntity<UserResponseDTO> updateProfile(
+            @Valid UpdateProfileRequestDTO request,
+            @PathVariable UUID id,
+            @RequestParam(value = "avatar", required = false) MultipartFile file){
+        User user = userService.updateProfile(id, request, file);
         var response = UserResponseDTO.fromEntity(user);
 
         return ResponseEntity.ok(response);

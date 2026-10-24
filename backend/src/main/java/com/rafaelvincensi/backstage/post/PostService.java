@@ -1,8 +1,10 @@
 package com.rafaelvincensi.backstage.post;
 
+import com.rafaelvincensi.backstage.exceptions.NotFoundException;
 import com.rafaelvincensi.backstage.infra.S3StorageService;
 import com.rafaelvincensi.backstage.user.User;
 import com.rafaelvincensi.backstage.user.UserService;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,5 +46,17 @@ public class PostService {
         return postRepository.findByUserId(id);
     }
 
+    public void deletePost(UUID id){
+        String email = (String) Objects.requireNonNull(SecurityContextHolder.getContext().getAuthentication()).getPrincipal();
+        User user = userService.findUserByEmail(email);
+
+        Post post = postRepository.findById(id).orElseThrow(() -> new NotFoundException("Post not found!"));
+
+        if (!user.getId().equals(post.getUser().getId())){
+            throw new AccessDeniedException("You cannot delete this post!");
+        }
+
+        postRepository.delete(post);
+    }
 
 }
